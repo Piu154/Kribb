@@ -136,7 +136,7 @@ export default function ProfileScreen() {
           label="Help & Support"
           onPress={() =>
             Linking.openURL(
-              "mailto:piyushagarwalvo@gmail.com?subject=Help%20%26%20Support%20-%20Kribb%20App",
+              "mailto:samantapriya154@gmail.com?subject=Help%20%26%20Support%20-%20Kribb%20App",
             )
           }
         />

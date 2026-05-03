@@ -1,12 +1,13 @@
-// import { useUserStore } from "@/store/userStore";
-import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
+import { useUserStore } from "@/store/userStore";
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
 
-export default function TabsLayout() {
-  //   const isAdmin = useUserStore((state) => state.isAdmin);
+function AndroidTabs() {
+  const isAdmin = useUserStore((state) => state.isAdmin);
 
   return (
-    <NativeTabs>
-      <NativeTabs.Trigger name="index">
+    <Tabs screenOptions={{ headerShown: false }}>
+      {/* <NativeTabs.Trigger name="index">
         <Icon sf="house.fill" />
         <Label>Home</Label>
       </NativeTabs.Trigger>
@@ -16,12 +17,12 @@ export default function TabsLayout() {
         <Label>Search</Label>
       </NativeTabs.Trigger>
 
-      {/* {isAdmin && ( */}
-      <NativeTabs.Trigger name="create">
-        <Icon sf="plus.circle.fill" />
-        <Label>Add Property</Label>
-      </NativeTabs.Trigger>
-      {/* )} */}
+      {isAdmin && (
+        <NativeTabs.Trigger name="create">
+          <Icon sf="plus.circle.fill" />
+          <Label>Add Property</Label>
+        </NativeTabs.Trigger>
+      )}
 
       <NativeTabs.Trigger name="saved">
         <Icon sf="heart.fill" />
@@ -31,7 +32,59 @@ export default function TabsLayout() {
       <NativeTabs.Trigger name="profile">
         <Icon sf="person.fill" />
         <Label>Profile</Label>
-      </NativeTabs.Trigger>
-    </NativeTabs>
+      </NativeTabs.Trigger> */}
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="search" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="create"
+        options={{
+          title: "Add",
+          href: isAdmin ? undefined : null,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="add-circle" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="saved"
+        options={{
+          title: "Saved",
+          href: isAdmin ? undefined : null,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="heart" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          href: isAdmin ? undefined : null,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tabs>
   );
+}
+
+export default function TabsLayout() {
+  return <AndroidTabs />;
 }
